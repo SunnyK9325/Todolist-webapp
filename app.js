@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"));                    // used to serve static files from a directory named "public".
 
 // connect to the db server
-mongoose.connect("mongodb+srv://sunny9325:brago9325@cluster0.legztwk.mongodb.net/todolistDB", {useNewUrlParser: true});  // connect to the url where our mongodb hosted locally then / database name and , to avoid deprecation warning
+// mongoose.connect("mongodb+srv://sunny9325:brago9325@cluster0.legztwk.mongodb.net/todolistDB", {useNewUrlParser: true});  // connect to the url where our mongodb hosted locally then / database name and , to avoid deprecation warning
 
 // Defining Schema
 const itemsSchema = {
@@ -153,6 +153,8 @@ app.get("/:customListName", function(req, res) {
 });
 
 
-app.listen(3000, function() {
-    console.log("Server is running on port 3000"); 
-});
+mongoose.connect("mongodb+srv://sunny9325:brago9325@cluster0.legztwk.mongodb.net/todolistDB", {useNewUrlParser: true}).then(
+  app.listen(process.env.PORT || 3000, function() {
+    console.log("Server started on port 3000");
+  })
+);
